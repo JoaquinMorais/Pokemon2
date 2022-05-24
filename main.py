@@ -1,23 +1,82 @@
 import random as rd
 from pokemon import Pokemon
+import time
+import numpy as np
+import sys
+from math import trunc
 
 
 
 
-Charmander = Pokemon('Charmander','Fuego',['Arañazo','Ascuas','Mordida','Placaje'],{'Ataque':rd.randint(7,10), 'Defensa':rd.randint(7,13)},rd.randint(39,55),1)
-Squirtle = Pokemon('Squirtle', 'Agua', ['Placaje', 'Latigo', 'Pistola Agua', 'Burbujas'], {'Ataque':rd.randint(6,13), 'Defensa':rd.randint(6,13)},rd.randint(30,47), 1)
+def Combate():
+    printLento(f"Preparate a un desafio a manos de... ¡Entrenador Rojo!")
+    printLento(f"Entrenador Rojo saca a {Pokemon2.name}")
+    printLento(f"Adelante, {Pokemon1.name}")
+    mostrarCaracteristicas()
+    while True:
+        if Pokemon1.velocidad < Pokemon2.velocidad:
+            Pelear("ataqueEnemigo")
+            if Pokemon1.derrotado():
+                printLento(f"{Pokemon1.name} ha sido derrotado")
+                break
+        Pelear("ataqueMio")
+        if Pokemon2.derrotado():
+            printLento(f"{Pokemon2.name} ha sido derrotado")
+            break
+        time.sleep(0.5)
+        printLento("...")
+        time.sleep(0.5)
+        Pelear("ataqueEnemigo")
+        if Pokemon1.derrotado():
+            printLento(f"{Pokemon1.name} ha sido derrotado")
+            break
+
+def Pelear(modo):
+    if modo == "ataqueMio":
+        printLento(f"Elige un ataque\n1) {Pokemon1.moves[0]}, 2) {Pokemon1.moves[1]}\n3) {Pokemon1.moves[2]}, 4) {Pokemon1.moves[3]}")
+        num = str(input(">> "))
+        if num in ["1","2","3","4"]:
+           ataque = Pokemon1.moves[int(num)-1] 
+        else:
+            ataque = Pokemon1.moves[0] 
+        printLento(f"¡{Pokemon1.name} usa {ataque}!")
+        daño = Pokemon1.Pegar(Pokemon2.defensa)
+        printLento(f"{Pokemon2.name} recibe {daño} de daño")
+        Pokemon2.vida -= daño
+        Pokemon2.normalizarVida()
+        printLento(f"{Pokemon2.name} Vida: {Pokemon2.vida}/{Pokemon2.vidaTotal}")
+
+    if modo == "ataqueEnemigo":
+        ataque = Pokemon2.moves[rd.randint(0,3)]
+        printLento(f"{Pokemon2.name} uso {ataque}!!!")
+        daño = Pokemon2.Pegar(Pokemon1.defensa)
+        printLento(f"{Pokemon1.name} recibe {daño} de daño")
+        Pokemon1.vida -= daño
+        Pokemon1.normalizarVida()
+        printLento(f"{Pokemon1.name} Vida: {Pokemon1.vida}/{Pokemon1.vidaTotal}")
+
+
+
+
+def printLento(s):
+    for c in s:
+        sys.stdout.write(c)
+        sys.stdout.flush()
+        time.sleep(0.05)
+    print()
+
+def mostrarCaracteristicas():
+    printLento("----- Batalla Pokemon -----")
+    printLento(f"{Pokemon1.getStatus()}")
+    printLento("VS")
+    printLento(f"{Pokemon2.getStatus()}")
+
+Charmander = Pokemon('Charmander','Fuego',['Arañazo','Ascuas','Mordida','Placaje'],{'Ataque':rd.randint(7,15), 'Defensa':rd.randint(7,13), 'Velocidad':rd.randint(7,15)},rd.randint(39,55),1)
+Squirtle = Pokemon('Squirtle', 'Agua', ['Placaje', 'Latigo', 'Pistola Agua', 'Burbujas'], {'Ataque':rd.randint(6,13), 'Defensa':rd.randint(6,13), 'Velocidad':rd.randint(5,10)},rd.randint(30,47), 1)
 
 
 
 Pokemon1 = Charmander
 Pokemon2 = Squirtle
 
-
-def Pelear():
-    Pokemon1.getStatus()
-    print('Vs')
-    Pokemon2.getStatus()
-
-
-
-
+Combate()
