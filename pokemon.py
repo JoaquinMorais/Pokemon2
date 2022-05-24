@@ -44,4 +44,11 @@ class Pokemon():
     def normalizarVida(self):
         if self.vida <= 0:
             self.vida = 0
+
+
+def Charmander():
+    Charmander = Pokemon('Charmander','Fuego',['Arañazo','Ascuas','Mordida','Placaje'],{'Ataque':rd.randint(7,15), 'Defensa':rd.randint(7,13), 'Velocidad':rd.randint(7,15)},rd.randint(39,55),1)
+    return Charmander
+Squirtle = Pokemon('Squirtle', 'Agua', ['Placaje', 'Latigo', 'Pistola Agua', 'Burbujas'], {'Ataque':rd.randint(6,13), 'Defensa':rd.randint(6,13), 'Velocidad':rd.randint(5,10)},rd.randint(30,47), 1)
+
         

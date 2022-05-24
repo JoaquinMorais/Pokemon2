@@ -1,5 +1,7 @@
 import random as rd
-from pokemon import Pokemon
+
+from pyparsing import Char
+from pokemon import *
 import time
 import numpy as np
 import sys
@@ -13,12 +15,14 @@ def Combate():
     printLento(f"Entrenador Rojo saca a {Pokemon2.name}")
     printLento(f"Adelante, {Pokemon1.name}")
     mostrarCaracteristicas()
+    if Pokemon1.velocidad < Pokemon2.velocidad:
+        Pelear("ataqueEnemigo")
     while True:
-        if Pokemon1.velocidad < Pokemon2.velocidad:
-            Pelear("ataqueEnemigo")
-            if Pokemon1.derrotado():
-                printLento(f"{Pokemon1.name} ha sido derrotado")
-                break
+        
+        if Pokemon1.derrotado():
+            printLento(f"{Pokemon1.name} ha sido derrotado")
+            break
+        
         Pelear("ataqueMio")
         if Pokemon2.derrotado():
             printLento(f"{Pokemon2.name} ha sido derrotado")
@@ -26,10 +30,9 @@ def Combate():
         time.sleep(0.5)
         printLento("...")
         time.sleep(0.5)
+        
         Pelear("ataqueEnemigo")
-        if Pokemon1.derrotado():
-            printLento(f"{Pokemon1.name} ha sido derrotado")
-            break
+        
 
 def Pelear(modo):
     if modo == "ataqueMio":
@@ -71,12 +74,10 @@ def mostrarCaracteristicas():
     printLento("VS")
     printLento(f"{Pokemon2.getStatus()}")
 
-Charmander = Pokemon('Charmander','Fuego',['Arañazo','Ascuas','Mordida','Placaje'],{'Ataque':rd.randint(7,15), 'Defensa':rd.randint(7,13), 'Velocidad':rd.randint(7,15)},rd.randint(39,55),1)
-Squirtle = Pokemon('Squirtle', 'Agua', ['Placaje', 'Latigo', 'Pistola Agua', 'Burbujas'], {'Ataque':rd.randint(6,13), 'Defensa':rd.randint(6,13), 'Velocidad':rd.randint(5,10)},rd.randint(30,47), 1)
 
 
 
-Pokemon1 = Charmander
-Pokemon2 = Squirtle
+Pokemon1 = Charmander()
+Pokemon2 = Charmander()
 
 Combate()
