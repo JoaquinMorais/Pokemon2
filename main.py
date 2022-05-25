@@ -10,11 +10,11 @@ from math import trunc
 
 
 
-def Combate():
+def IniciarCombate():
     printLento(f"Preparate a un desafio a manos de... ¡Entrenador Rojo!")
     printLento(f"Entrenador Rojo saca a {Pokemon2.name}")
     printLento(f"Adelante, {Pokemon1.name}")
-    mostrarCaracteristicas()
+    #mostrarCaracteristicas()
     if Pokemon1.velocidad < Pokemon2.velocidad:
         Pelear("ataqueEnemigo")
     while True:
@@ -28,7 +28,7 @@ def Combate():
             printLento(f"{Pokemon2.name} ha sido derrotado")
             break
         time.sleep(0.5)
-        printLento("...")
+        printLento("...",0.1)
         time.sleep(0.5)
         
         Pelear("ataqueEnemigo")
@@ -44,6 +44,9 @@ def Pelear(modo):
             ataque = Pokemon1.moves[0] 
         printLento(f"¡{Pokemon1.name} usa {ataque}!")
         daño = Pokemon1.Pegar(Pokemon2.defensa)
+        cambioDaño,txt = Pokemon1.ventajaTipo(Pokemon2.tipo)
+        daño = round(daño*cambioDaño)
+        printLento(txt)
         printLento(f"{Pokemon2.name} recibe {daño} de daño")
         Pokemon2.vida -= daño
         Pokemon2.normalizarVida()
@@ -53,6 +56,9 @@ def Pelear(modo):
         ataque = Pokemon2.moves[rd.randint(0,3)]
         printLento(f"{Pokemon2.name} uso {ataque}!!!")
         daño = Pokemon2.Pegar(Pokemon1.defensa)
+        cambioDaño,txt = Pokemon2.ventajaTipo(Pokemon1.tipo)
+        daño = round(daño*cambioDaño)
+        printLento(txt)
         printLento(f"{Pokemon1.name} recibe {daño} de daño")
         Pokemon1.vida -= daño
         Pokemon1.normalizarVida()
@@ -61,11 +67,11 @@ def Pelear(modo):
 
 
 
-def printLento(s):
+def printLento(s, delay=0.04):
     for c in s:
         sys.stdout.write(c)
         sys.stdout.flush()
-        time.sleep(0.05)
+        time.sleep(delay)
     print()
 
 def mostrarCaracteristicas():
@@ -77,7 +83,15 @@ def mostrarCaracteristicas():
 
 
 
-Pokemon1 = Charmander()
-Pokemon2 = Charmander()
+Pokemon1 = Bulbasaur()
+Pokemon2 = Squirtle()
 
-Combate()
+
+IniciarCombate()
+
+
+
+
+
+
+
