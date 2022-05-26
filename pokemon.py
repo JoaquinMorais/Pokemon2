@@ -68,7 +68,15 @@ class Pokemon():
                     
 
 
-
+def IniciarJuego():
+    print('             _                              ')
+    print('            | |                             ')
+    print(' _ __   ___ | | _____ _ __ ___   ___  _ __  ')
+    print(f"|  _ \ / _ \| |/ / _ \  _ ` _ \ / _ \|  _ \ ")
+    print('| |_) | (_) |   <  __/ | | | | | (_) | | | |')
+    print(f'| .__/ \___/|_|\_\___|_| |_| |_|\___/|_| |_|')
+    print('| |                                         ')
+    print('|_|                                         ')
 
 
 def Charmander():
@@ -80,4 +88,8 @@ def Squirtle():
 def Bulbasaur():
     Bulbasaur = Pokemon('Bulbasaur', 'Planta', ['Placaje', 'Latigo Cepa', 'Bomba Lodo', 'Latigazo'], {'Ataque':rd.randint(5,10), 'Defensa':rd.randint(9,15), 'Velocidad':rd.randint(4,8)},rd.randint(36,49), 1)
     return Bulbasaur
+
+
+
+
 

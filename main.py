@@ -2,8 +2,9 @@ import random as rd
 
 from pyparsing import Char
 from pokemon import *
+from drawPokemon import *
 import time
-import numpy as np
+#import numpy as np
 import sys
 from math import trunc
 
@@ -73,6 +74,13 @@ def printLento(s, delay=0.04):
         sys.stdout.flush()
         time.sleep(delay)
     print()
+def printListaLento(l, delay=0.04):
+    for s in l:
+        for c in s:
+            sys.stdout.write(c)
+            sys.stdout.flush()
+            time.sleep(delay)
+        print()
 
 def mostrarCaracteristicas():
     printLento("----- Batalla Pokemon -----")
@@ -80,17 +88,20 @@ def mostrarCaracteristicas():
     printLento("VS")
     printLento(f"{Pokemon2.getStatus()}")
 
+def Main():
+    printLento("Iniciando Juego... Espere unos segundos")
+    time.sleep(2)
+    IniciarJuego()
+    time.sleep(5)
+    IniciarCombate()
+
+
+Pokemon1 = Squirtle()
+Pokemon2 = Charmander()
 
 
 
-Pokemon1 = Bulbasaur()
-Pokemon2 = Squirtle()
-
-
-IniciarCombate()
-
-
-
+Main()
 
 
 
