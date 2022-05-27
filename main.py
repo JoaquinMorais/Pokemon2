@@ -1,12 +1,13 @@
 import random as rd
 
 from pyparsing import Char
-from pokemon import *
-from drawPokemon import *
 import time
-#import numpy as np
 import sys
 from math import trunc
+
+from pokemon import *
+from drawPokemon import *
+from movimientos import *
 
 
 
@@ -40,26 +41,28 @@ def Pelear(modo):
         printLento(f"Elige un ataque\n1) {Pokemon1.moves[0]}, 2) {Pokemon1.moves[1]}\n3) {Pokemon1.moves[2]}, 4) {Pokemon1.moves[3]}")
         num = str(input(">> "))
         if num in ["1","2","3","4"]:
-           ataque = Pokemon1.moves[int(num)-1] 
+           ataque = int(num)-1
         else:
-            ataque = Pokemon1.moves[0] 
-        printLento(f"¡{Pokemon1.name} usa {ataque}!")
-        daño = Pokemon1.Pegar(Pokemon2.defensa)
-        cambioDaño,txt = Pokemon1.ventajaTipo(Pokemon2.tipo)
+            ataque = 0
+        printLento(f"¡{Pokemon1.name} usa {Pokemon1.moves[ataque]}!")
+        daño = Pokemon1.Pegar(ataque,Pokemon2.defensa)
+        cambioDaño,txt = Pokemon1.ventajaTipo(ataque,Pokemon2.tipo)
         daño = round(daño*cambioDaño)
-        printLento(txt)
+        if txt:
+            printLento(txt)
         printLento(f"{Pokemon2.name} recibe {daño} de daño")
         Pokemon2.vida -= daño
         Pokemon2.normalizarVida()
         printLento(f"{Pokemon2.name} Vida: {Pokemon2.vida}/{Pokemon2.vidaTotal}")
 
     if modo == "ataqueEnemigo":
-        ataque = Pokemon2.moves[rd.randint(0,3)]
-        printLento(f"{Pokemon2.name} uso {ataque}!!!")
-        daño = Pokemon2.Pegar(Pokemon1.defensa)
-        cambioDaño,txt = Pokemon2.ventajaTipo(Pokemon1.tipo)
+        ataque = rd.randint(0,3)
+        printLento(f"{Pokemon2.name} uso {Pokemon2.moves[ataque]}!!!")
+        daño = Pokemon2.Pegar(ataque,Pokemon1.defensa)
+        cambioDaño,txt = Pokemon2.ventajaTipo(ataque,Pokemon1.tipo)
         daño = round(daño*cambioDaño)
-        printLento(txt)
+        if txt:
+            printLento(txt)
         printLento(f"{Pokemon1.name} recibe {daño} de daño")
         Pokemon1.vida -= daño
         Pokemon1.normalizarVida()
@@ -92,11 +95,11 @@ def Main():
     printLento("Iniciando Juego... Espere unos segundos")
     time.sleep(2)
     IniciarJuego()
-    time.sleep(5)
+    time.sleep(2)
     IniciarCombate()
 
 
-Pokemon1 = Squirtle()
+Pokemon1 = Bulbasaur()
 Pokemon2 = Charmander()
 
 
