@@ -39,7 +39,14 @@ def IniciarCombate():
 
 def Pelear(modo):
     if modo == "ataqueMio":
-        printLento(f"Elige un ataque\n1) {Pokemon1.moves[0]}, 2) {Pokemon1.moves[1]}\n3) {Pokemon1.moves[2]}, 4) {Pokemon1.moves[3]}")
+        diferenciaLetras1 =""
+        diferenciaLetras2 =""
+        if len(Pokemon1.moves[0].nombre) > len(Pokemon1.moves[2].nombre):
+            diferenciaLetras2 = " "*(len(Pokemon1.moves[0].nombre) - len(Pokemon1.moves[2].nombre))
+        elif len(Pokemon1.moves[0].nombre) < len(Pokemon1.moves[2].nombre):
+            diferenciaLetras1 = " "*(len(Pokemon1.moves[2].nombre) - len(Pokemon1.moves[0].nombre))
+        printLento(f"Elige un ataque\n1) {Pokemon1.moves[0]} {diferenciaLetras1} 2) {Pokemon1.moves[1]}")
+        printLento(f"3) {Pokemon1.moves[2]} {diferenciaLetras2} 4) {Pokemon1.moves[3]}")
         num = str(input(">> "))
         if num in ["1","2","3","4"]:
            ataque = int(num)-1
@@ -121,7 +128,7 @@ def Main(intro = True):
         Menu()
 
 
-Pokemon1 = Squirtle()
+Pokemon1 = Bulbasaur()
 Pokemon2 = Charmander()
 
 
