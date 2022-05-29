@@ -1,9 +1,11 @@
 class Movimientos():
-    def __init__(self,nombre,tipo,potencia,precision):
+    def __init__(self,nombre,tipo,potencia,precision,caracteristica = 'Normal',precicionEfecto = 100):
         self.nombre = nombre
         self.tipo = tipo
         self.potencia = potencia
         self.precision = precision
+        self.caracteristica = caracteristica
+        self.precicionEfecto = precicionEfecto
     def __str__(self):
         return self.nombre
 
@@ -23,7 +25,19 @@ Hidropulso = Movimientos('Hidropulso','Agua',60,100)
 AcuaCola = Movimientos('Acua Cola','Agua',90,90)
 Cabezazo = Movimientos('Cabezazo','Normal',130,80)
 
-Drenadoras = Movimientos('Drenadoras','Planta',10,100)
+Drenadoras = Movimientos('Drenadoras','Planta',10,100,'Regenerar')
 LatigoCepa = Movimientos('Latigo Cepa','Planta',45,100)
 Derribo = Movimientos('Derribo','Normal',90,80)
+HojaAfilada = Movimientos('Hoja Afilada','Planta',65,100)
+DobleFilo = Movimientos('Doble Filo','Normal',130,90)
+
+PolvoVeneno = Movimientos('Polvo Veneno','Veneno',0,75,'Envenenar')
+
+
+
+
+
+
+
+
 
