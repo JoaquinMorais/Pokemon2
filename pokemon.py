@@ -131,7 +131,7 @@ class Pokemon():
         self.status = 'Normal'
 
     def MostrarEnPokedex(self):
-        return f'{self.name}\nVida: {self.vida}/{self.vidaTotal}\nNivel: {self.nivel}\nAtaque: {self.ataque}\nDefensa: {self.defensa}\nVelocidad: {self.velocidad}\n'.center(50)
+        return f'{self.name}\nVida: {self.vida}/{self.vidaTotal}\nNivel: {self.nivel}\nAtaque: {self.ataque}\nDefensa: {self.defensa}\nVelocidad: {self.velocidad}'.center(50)
 
     def MovimientoEspecial(self,pos):
         if self.moves[pos].caracteristica != 'Normal':

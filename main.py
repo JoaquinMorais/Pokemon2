@@ -9,7 +9,24 @@ from pokemon import *
 from drawPokemon import *
 from movimientos import *
 
+### Cosas Extra ###
+def printLento(s, delay=0.04):
+    if s:
+        for c in s:
+            sys.stdout.write(c)
+            sys.stdout.flush()
+            time.sleep(delay)
+        print()
 
+def printListaLento(l, delay=0.04):
+    for s in l:
+        for c in s:
+            sys.stdout.write(c)
+            sys.stdout.flush()
+            time.sleep(delay)
+        print()
+def clear():
+    os.system('cls')
 
 ########## PELEAS ##########
 def IniciarCombate():
@@ -128,31 +145,19 @@ def mostrarAtaques(difer1, difer2):
     return int(num)-1
     
 
-### PRINTS ###
-def printLento(s, delay=0.04):
-    if s:
-        for c in s:
-            sys.stdout.write(c)
-            sys.stdout.flush()
-            time.sleep(delay)
-        print()
-
-def printListaLento(l, delay=0.04):
-    for s in l:
-        for c in s:
-            sys.stdout.write(c)
-            sys.stdout.flush()
-            time.sleep(delay)
-        print()
 
 ########## Menu ##########
 def Menu():
+    time.sleep(2)
+    clear()
     printLento("----- Menu -----")
     printLento("1) Jugar")
     printLento("2) Evolucionar")
     printLento("3) Pokedex")
     printLento("4) Salir")
     num = str(input(">> "))
+    if num in ["1","2","3","4"]:
+        clear()
     if num == "1":
         Pokemon1.Revivir()
         Pokemon2.Revivir()
@@ -163,10 +168,10 @@ def Menu():
     if num == "3":
         txt = Pokemon1.MostrarEnPokedex()
         printLento(txt)
-        time.sleep(2)
     elif num == "4":
         printLento("Cerrando Juego...",0.08)
         time.sleep(1)
+        clear()
         sys.exit()
     else:
         Menu()
@@ -177,17 +182,17 @@ def Main(intro = True):
         printLento("Iniciando Juego... Espere unos segundos")
         time.sleep(2)
         IniciarJuego()
-        time.sleep(2)
+
     while True:
         Menu()
 
 
 Pokemon1 = Bulbasaur()
-Pokemon2 = Ivysaur()
+Pokemon2 = Charmeleon()
 
 
 
-Main(False)
+Main()
 
 
 
