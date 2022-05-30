@@ -7,13 +7,14 @@ import time
 from movimientos import *
 
 class Pokemon():
-    def __init__(self, name, tipo, moves, EVs, vida, nivel,evolucion = None):
+    def __init__(self, name, tipo,tipo2, moves, EVs, vida, nivel,evolucion = None):
         
         #, experiencia, ev, nivel_ev, sig_pok, estado
         variacion = 5
         # Guarda variables como atributos
         self.name = name
         self.tipo = tipo
+        self.tipo2 = tipo2
         self.moves = moves
         self.ataque = rd.randint(EVs['Ataque']-variacion, EVs['Ataque']+variacion)
         self.defensa = rd.randint( EVs['Defensa']-variacion, EVs['Defensa']+variacion)
@@ -72,29 +73,105 @@ class Pokemon():
     def ventajaTipo(self,pos,tipoEnemigo):
         ataque = self.moves[pos]
         
-        #if ataque.tipo == 'Normal' or ataque.tipo == 'Siniestro' or ataque.tipo == 'Dragon':
-        #    return 1,''
+        # COMPLETOS: Planta Veneno Acero Bicho Electrico Hielo Lucha Roca Volador Dragon
+
+
+        #Normal Siniestro
+        
 
         if ataque.tipo == 'Acero':
-            if tipoEnemigo == 'Fuego' or tipoEnemigo == 'Agua':
-                return 0.5,'No es muy efectivo...'
-                
+            if tipoEnemigo in ['Fuego','Agua','Electrico','Acero']:
+                return 0.5
+            if tipoEnemigo in ['Hada','Hielo','Roca']:
+                return 2
+            
+        if ataque.tipo == 'Bicho':
+            if tipoEnemigo in ['Acero','Fantasma','Fuego','Hada','Lucha','Veneno','Volador']:
+                return 0.5
+            if tipoEnemigo in ['Planta','Psiquico','Siniestro']:
+                return 2
+
+        if ataque.tipo == 'Electrico':
+            if tipoEnemigo in ['Dragon','Electrico','Planta']:
+                return 0.5
+            if tipoEnemigo in ['Agua','Volador']:
+                return 2
+            if tipoEnemigo in ['Tierra']:
+                return 0
+        
+        if ataque.tipo == 'Dragon':
+            if tipoEnemigo in ['Acero']:
+                return 0.5
+            if tipoEnemigo in ['Dragon']:
+                return 2
+            if tipoEnemigo in ['Hada']:
+                return 0
+
+        if ataque.tipo == 'Hielo':
+            if tipoEnemigo in ['Acero','Agua','Fuego','Hielo']:
+                return 0.5
+            if tipoEnemigo in ['Dragon','Planta','Tierra','Volador']:
+                return 2
+        
+        if ataque.tipo == 'Lucha':
+            if tipoEnemigo in ['Acero','Hielo','Normal','Roca','Siniestro']:
+                return 0.5
+            if tipoEnemigo in ['Bicho','Hada','Psiquico','Veneno','Volador']:
+                return 2
+            if tipoEnemigo in ['Fantasma']:
+                return 0
+
+        if ataque.tipo == 'Roca':
+            if tipoEnemigo in ['Acero','Lucha','Tierra']:
+                return 0.5
+            if tipoEnemigo in ['Bicho','Fuego','Hielo','Volador']:
+                return 2
+
+        if ataque.tipo == 'Tierra':
+            if tipoEnemigo in ['Acero','Hielo','Normal','Roca','Siniestro']:
+                return 0.5
+            if tipoEnemigo in ['Bicho','Hada','Psiquico','Veneno','Volador']:
+                return 2
+            if tipoEnemigo in ['Fantasma']:
+                return 0 
+
+
+        if ataque.tipo == 'Veneno':
+            if tipoEnemigo in ['Bicho','Planta']:
+                return 0.5
+            if tipoEnemigo in ['Acero','Electrico','Fuego','Roca','Veneno']:
+                return 2
+            if tipoEnemigo in ['Volador']:
+                return 0
+
+        if ataque.tipo == 'Volador':
+            if tipoEnemigo in ['Acero','Electrico','Roca']:
+                return 0.5
+            if tipoEnemigo in ['Bicho','Lucha','Planta']:
+                return 2
+
+        if ataque.tipo == 'Planta':
+            if tipoEnemigo in ['Roca']:
+                return 2
+            if tipoEnemigo in ['Acero','Bicho','Dragon','Veneno','Volador']:
+                return 0.5
+
         version = ['Fuego', 'Agua', 'Planta']
         if ataque.tipo in version and tipoEnemigo in version:
             for i, k in enumerate(version):
                 if self.tipo == k:
                     #Ambos son del mismo tipo
                     if tipoEnemigo == k:
-                        return 0.5,'No es muy efectivo...'
+                        return 0.5
                             
                     #Pokemon2 es Fuerte
                     if tipoEnemigo == version[(i+1)%3]:
-                        return 0.5,'No es muy efectivo...'
+                        return 0.5
                                 
                     #Pokemon2 es debil
                     if tipoEnemigo == version[(i+2)%3]:
-                        return 2,'Es super efectivo!'
-        return 1,''
+                        return 2
+        return 1
     
     def Evolucionar(self):
         if self.evolucion:
@@ -106,12 +183,18 @@ class Pokemon():
                 self.ataque = self.evolucion.ataque
             if self.defensa < self.evolucion.defensa:
                 self.defensa = self.evolucion.defensa
+            if self.ataqueEspecial < self.evolucion.ataqueEspecial:
+                self.ataqueEspecial = self.evolucion.ataqueEspecial
+            if self.defensaEspecial < self.evolucion.defensaEspecial:
+                self.defensaEspecial = self.evolucion.defensaEspecial
             if self.velocidad < self.evolucion.velocidad:
                 self.velocidad = self.evolucion.velocidad
             if self.vidaTotal < self.evolucion.vidaTotal:
                 vidaAumentar = self.evolucion.vidaTotal - self.vidaTotal
                 self.vida += vidaAumentar
                 self.vidaTotal += vidaAumentar
+            if self.evolucion.tipo2:
+                self.tipo2 = self.evolucion.tipo2
             self.evolucion = self.evolucion.evolucion
             return f'Tu Pokemon a evolucionado a {self.name}!!!'
         return 'Tu Pokemon no Puede Evolucionar'
@@ -131,7 +214,10 @@ class Pokemon():
         self.status = 'Normal'
 
     def MostrarEnPokedex(self):
-        return f'{self.name}\nVida: {self.vida}/{self.vidaTotal}\nNivel: {self.nivel}\nAtaque: {self.ataque}\nDefensa: {self.defensa}\nVelocidad: {self.velocidad}'.center(50)
+        txt = ''
+        if self.tipo2:
+            txt = f' / {self.tipo2}'
+        return f'{self.name}\nTipo: {self.tipo + txt}\nVida: {self.vida}/{self.vidaTotal}\nNivel: {self.nivel}\nAtaque: {self.ataque} - Defensa: {self.defensa}\nAtaque Esp: {self.ataqueEspecial} - Defensa Esp: {self.defensaEspecial}\nVelocidad: {self.velocidad}'.center(50)
 
     def MovimientoEspecial(self,pos):
         if self.moves[pos].caracteristica != 'Normal':
@@ -148,29 +234,50 @@ class Pokemon():
         self.vida += aumentoVida
         if self.vida > self.vidaTotal:
             self.vida = self.vidaTotal
-        
+    
+    def efectoAlterado(self,posicionAtaque,daño,status):
+        statusOtroPokemon = status
+        if self.moves[posicionAtaque].precicionEfecto >= rd.randint(1,100):
+            if self.moves[posicionAtaque].nombre == 'Polvo Veneno':
+                statusOtroPokemon = 'Envenenado'
+            if self.moves[posicionAtaque].nombre == 'Drenadoras':
+                self.addVida(round(daño/2))
+                printLento(f'{self.name} absorbio {round(daño/2)}!!!')
+                printLento(f"{self.name} Vida: {self.vida}/{self.vidaTotal}")
+                
+        else: 
+            printLento("No efectuó ningún efecto")
 
+        if statusOtroPokemon != 'Normal':
+            printLento(f"{statusOtroPokemon} está {statusOtroPokemon}")
+        
+        return statusOtroPokemon
+
+
+def Charizard():
+    return Pokemon('Charizard','Fuego','Volador',[Lanzallamas,Infierno,AtaqueAla,Cuchillada], {'Ataque':84, 'Defensa':78,'AtaqueEspecial':109,'DefensaEspecial':85, 'Velocidad':100}, 78, 36)
 
 def Charmeleon():
-    Charmeleon = Pokemon('Charmeleon', 'Fuego', [Pirotecnea,ColmilloIgneo,GarraMetal,FuriaDragon], {'Ataque':64, 'Defensa':58,'AtaqueEspecial':80,'DefensaEspecial':65, 'Velocidad':80}, 58, 16)
-    return Charmeleon
+    return Pokemon('Charmeleon', 'Fuego',None, [Pirotecnea,ColmilloIgneo,GarraMetal,FuriaDragon], {'Ataque':64, 'Defensa':58,'AtaqueEspecial':80,'DefensaEspecial':65, 'Velocidad':80}, 58, 16,evolucion=Charizard())
+
 def Charmander():
-    Charmander = Pokemon('Charmander','Fuego',[Arañazo,Ascuas,GarraMetal,FuriaDragon],{'Ataque':52, 'Defensa':43,'AtaqueEspecial':60,'DefensaEspecial':50, 'Velocidad':65},39,1,evolucion=Charmeleon())
-    return Charmander
+    return Pokemon('Charmander','Fuego',None,[Arañazo,Ascuas,GarraMetal,FuriaDragon],{'Ataque':52, 'Defensa':43,'AtaqueEspecial':60,'DefensaEspecial':50, 'Velocidad':65},39,1,evolucion=Charmeleon())
+
     
+
 def Wartortle():
-    Wartortle = Pokemon('Wartortle','Agua',[Mordisco,Cabezazo,AcuaCola,Hidropulso],{'Ataque':63, 'Defensa':80,'AtaqueEspecial':65,'DefensaEspecial':80, 'Velocidad':58},59,16,)
-    return Wartortle
+    return Pokemon('Wartortle','Agua',None,[Mordisco,Cabezazo,AcuaCola,Hidropulso],{'Ataque':63, 'Defensa':80,'AtaqueEspecial':65,'DefensaEspecial':80, 'Velocidad':58},59,16,)
+
 def Squirtle():
-    Squirtle = Pokemon('Squirtle', 'Agua', [Placaje,PistolaAgua,Burbuja,Mordisco], {'Ataque':48, 'Defensa':65,'AtaqueEspecial':50,'DefensaEspecial':64, 'Velocidad':43},44, 1, evolucion=Wartortle())
-    return Squirtle
+    return Pokemon('Squirtle', 'Agua',None, [Placaje,PistolaAgua,Burbuja,Mordisco], {'Ataque':48, 'Defensa':65,'AtaqueEspecial':50,'DefensaEspecial':64, 'Velocidad':43},44, 1, evolucion=Wartortle())
+
+
 
 def Ivysaur():
-    Ivysaur = Pokemon('Ivysaur','Planta',[DobleFilo,PolvoVeneno,HojaAfilada,LatigoCepa],{'Ataque':62, 'Defensa':63,'AtaqueEspecial':80,'DefensaEspecial':80, 'Velocidad':60},60,16)
-    return Ivysaur
+    return Pokemon('Ivysaur','Planta','Veneno',[DobleFilo,PolvoVeneno,HojaAfilada,LatigoCepa],{'Ataque':62, 'Defensa':63,'AtaqueEspecial':80,'DefensaEspecial':80, 'Velocidad':60},60,16)
 def Bulbasaur():
-    Bulbasaur = Pokemon('Bulbasaur', 'Planta', [Placaje, LatigoCepa, Drenadoras, Derribo], {'Ataque':49, 'Defensa':49,'AtaqueEspecial':65,'DefensaEspecial':65, 'Velocidad':45},45, 1,evolucion=Ivysaur())
-    return Bulbasaur
+    return Pokemon('Bulbasaur', 'Planta','Veneno', [Placaje, LatigoCepa, Drenadoras, Derribo], {'Ataque':49, 'Defensa':49,'AtaqueEspecial':65,'DefensaEspecial':65, 'Velocidad':45},45, 1,evolucion=Ivysaur())
+
 
 
 

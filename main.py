@@ -27,7 +27,16 @@ def printListaLento(l, delay=0.04):
         print()
 def clear():
     os.system('cls')
-
+def efectividad(ef):
+    print(ef)
+    if ef in [2,4]:
+        return f"¡Es Super Efectivo!"
+    elif ef == 1:
+        return f""
+    elif ef == 0:
+        return f"No Causo Ningun Efecto..."
+    else:
+        return f"No Es Muy Efectivo..."
 ########## PELEAS ##########
 def IniciarCombate():
     printLento(f"Preparate a un desafio a manos de... ¡Entrenador Rojo!")
@@ -65,14 +74,16 @@ def Pelear(modo):
         
         
         if Pokemon1.moves[ataque].potencia != 0:
-            EfectividadAtaque,txt = Pokemon1.ventajaTipo(ataque,Pokemon2.tipo)
+            EfectividadAtaque = Pokemon1.ventajaTipo(ataque,Pokemon2.tipo) * Pokemon1.ventajaTipo(ataque,Pokemon2.tipo2)
+            txt = efectividad(EfectividadAtaque)
             daño = Pokemon1.Pegar(ataque,Pokemon2.defensa,Pokemon2.defensaEspecial,EfectividadAtaque)
             printLento(txt)
             printLento(f"{Pokemon2.name} recibe {daño} de daño")
             Pokemon2.vida -= daño
 
         if Pokemon1.MovimientoEspecial(ataque):
-            efectoAlterado(1,ataque,daño)
+            Pokemon2.status = Pokemon1.efectoAlterado(ataque,daño,Pokemon2.status)
+            
 
         Pokemon2.Cambios()
         printLento(f"{Pokemon2.name} Vida: {Pokemon2.vida}/{Pokemon2.vidaTotal}")
@@ -86,47 +97,20 @@ def Pelear(modo):
 
         
         if Pokemon2.moves[ataque].potencia != 0:
-            EfectividadAtaque,txt = Pokemon2.ventajaTipo(ataque,Pokemon1.tipo)
+            EfectividadAtaque = Pokemon2.ventajaTipo(ataque,Pokemon1.tipo) * Pokemon2.ventajaTipo(ataque,Pokemon1.tipo2)
+            txt = efectividad(EfectividadAtaque)
             daño = Pokemon2.Pegar(ataque,Pokemon1.defensa,Pokemon1.defensaEspecial,EfectividadAtaque)
             printLento(txt)
             printLento(f"{Pokemon1.name} recibe {daño} de daño")
             Pokemon1.vida -= daño
 
         if Pokemon2.MovimientoEspecial(ataque):
-            efectoAlterado(2,ataque,daño)
+            Pokemon1.status = Pokemon2.efectoAlterado(ataque,daño,Pokemon1.status)
 
         Pokemon1.Cambios()
         printLento(f"{Pokemon1.name} Vida: {Pokemon1.vida}/{Pokemon1.vidaTotal}")
 
-def efectoAlterado(modo,posicionAtaque,daño = 0):
-    if modo == 1:
-        if Pokemon1.moves[posicionAtaque].precicionEfecto >= rd.randint(1,100):
-            if Pokemon1.moves[posicionAtaque].nombre == 'Polvo Veneno':
-                Pokemon2.status = 'Envenenado'
-            if Pokemon1.moves[posicionAtaque].nombre == 'Drenadoras':
-                Pokemon1.addVida(daño)
-                printLento(f'{Pokemon1.name} absorbio {daño}!!!')
-                printLento(f"{Pokemon1.name} Vida: {Pokemon1.vida}/{Pokemon1.vidaTotal}")
-                
-        else: 
-            printLento("No efectuó ningún efecto")
 
-        if Pokemon2.status != 'Normal':
-            printLento(f"{Pokemon2.name} está {Pokemon2.status}")
-        
-    if modo == 2:
-        if Pokemon2.moves[posicionAtaque].precicionEfecto >= rd.randint(1,100):
-            if Pokemon2.moves[posicionAtaque].nombre == 'Polvo Veneno':
-                Pokemon1.status = 'Envenenado'
-            if Pokemon2.moves[posicionAtaque].nombre == 'Drenadoras':
-                Pokemon2.addVida(daño)
-                printLento(f'{Pokemon2.name} absorbio {daño}!!!')
-                printLento(f"{Pokemon2.name} Vida: {Pokemon2.vida}/{Pokemon2.vidaTotal}")
-        else: 
-            printLento("No efectuó ningún efecto")
-
-        if Pokemon1.status != 'Normal':
-            printLento(f"{Pokemon1.name} está {Pokemon1.status}")
 
 
 def mostrarCaracteristicas():
@@ -187,8 +171,8 @@ def Main(intro = True):
         Menu()
 
 
-Pokemon1 = Bulbasaur()
-Pokemon2 = Charmeleon()
+Pokemon1 = Charmander()
+Pokemon2 = Wartortle()
 
 
 
