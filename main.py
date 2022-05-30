@@ -37,6 +37,41 @@ def efectividad(ef):
         return f"No Causo Ningun Efecto..."
     else:
         return f"No Es Muy Efectivo..."
+
+def getPokemon(Pok,n):
+    """
+    if n == "1":
+        return Bulbasaur()
+    elif n == "2":
+        return Ivysaur()
+    elif n == "3":
+        return Ivysaur()
+
+    elif n == "4":
+        return Charmander()
+    elif n == "5":
+        return Charmeleon()
+    elif n == "6":
+        return Charizard()
+
+    elif n == "7":
+        return Squirtle()
+    elif n == "8":
+        return Wartortle()
+    elif n == "9":
+        return Wartortle()
+
+    elif n == "10":
+        return Riolu()
+    elif n == "11":
+        return Lucario()
+    elif n == "12":
+        return MegaLucario()
+    else:
+        return Riolu()
+    """
+    
+
 ########## PELEAS ##########
 def IniciarCombate():
     printLento(f"Preparate a un desafio a manos de... ¡Entrenador Rojo!")
@@ -138,10 +173,11 @@ def Menu():
     printLento("1) Jugar")
     printLento("2) Evolucionar")
     printLento("3) Pokedex")
-    printLento("4) Salir")
+    printLento("4) Elegir Pokemon")
+    printLento("5) Salir")
     num = str(input(">> "))
-    if num in ["1","2","3","4"]:
-        clear()
+    
+    clear()
     if num == "1":
         Pokemon1.Revivir()
         Pokemon2.Revivir()
@@ -152,7 +188,11 @@ def Menu():
     if num == "3":
         txt = Pokemon1.MostrarEnPokedex()
         printLento(txt)
-    elif num == "4":
+    if num == "4":
+        n = str(input("Ingrese el numero del pokemon que desea elegir: "))
+        #getPokemon(Pokemon1,n)
+        printLento(f"{Pokemon1.name} elegido")
+    elif num == "5":
         printLento("Cerrando Juego...",0.08)
         time.sleep(1)
         clear()
@@ -171,8 +211,8 @@ def Main(intro = True):
         Menu()
 
 
-Pokemon1 = Charmander()
-Pokemon2 = Wartortle()
+Pokemon1 = Squirtle()
+Pokemon2 = Bulbasaur()
 
 
 

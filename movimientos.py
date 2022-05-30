@@ -37,8 +37,17 @@ DobleFilo = Movimientos('Doble Filo','Normal',130,90)
 
 PolvoVeneno = Movimientos('Polvo Veneno','Veneno',0,100,'Envenenar',75)
 
+EsferaAura = Movimientos('Esfera Aura','Lucha',80,100)
+GarraMetal = Movimientos('Garra Metal','Acero',50,95)
+AtaqueRapido = Movimientos('Ataque Rapido','Normal',40,100)
+Amago = Movimientos('Amago','Normal',30,100)
+PuñoIncremento = Movimientos('Puño Incremento','Lucha',60,100)
+ABocarrajo = Movimientos('ABocarrajo','Lucha',120,100)
+PulsoDragon = Movimientos('Pulso Dragon','Dragon',85,100)
+VelocidadExtrema = Movimientos('Velocidad Extrema','Normal',80,100)
 
 
+PulsoCura = Movimientos('Pulso Cura','Psiquico',0,100,'Cura')
 
 
 

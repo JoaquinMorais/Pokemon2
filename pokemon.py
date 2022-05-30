@@ -1,6 +1,7 @@
 
 from math import trunc
 import random as rd
+from re import S
 import sys
 import time
 
@@ -73,10 +74,10 @@ class Pokemon():
     def ventajaTipo(self,pos,tipoEnemigo):
         ataque = self.moves[pos]
         
-        # COMPLETOS: Planta Veneno Acero Bicho Electrico Hielo Lucha Roca Volador Dragon
+        # COMPLETOS: Planta Veneno Acero Bicho Electrico Hielo Lucha Roca Volador Dragon Normal
 
 
-        #Normal Siniestro
+        #Siniestro
         
 
         if ataque.tipo == 'Acero':
@@ -135,6 +136,11 @@ class Pokemon():
             if tipoEnemigo in ['Fantasma']:
                 return 0 
 
+        if ataque.tipo == 'Fuego':
+            if tipoEnemigo in ['Agua','Dragon','Fuego','Roca']:
+                return 0.5
+            if tipoEnemigo in ['Bicho','Acero','Hielo','Planta']:
+                return 2
 
         if ataque.tipo == 'Veneno':
             if tipoEnemigo in ['Bicho','Planta']:
@@ -142,6 +148,11 @@ class Pokemon():
             if tipoEnemigo in ['Acero','Electrico','Fuego','Roca','Veneno']:
                 return 2
             if tipoEnemigo in ['Volador']:
+                return 0
+        if ataque.tipo == 'Normal':
+            if tipoEnemigo in ['Acero','Roca']:
+                return 0.5
+            if tipoEnemigo in ['Fantasma']:
                 return 0
 
         if ataque.tipo == 'Volador':
@@ -280,6 +291,42 @@ def Bulbasaur():
 
 
 
+def MegaLucario():
+    return Pokemon('Mega Lucario', 'Lucha','Acero', [ABocarrajo, VelocidadExtrema, PuñoIncremento, PulsoDragon], {'Ataque':145, 'Defensa':88,'AtaqueEspecial':140,'DefensaEspecial':70, 'Velocidad':112},70, 55)
+def Lucario():
+    return Pokemon('Lucario', 'Lucha','Acero', [PuñoIncremento,PulsoDragon,EsferaAura, GarraMetal], {'Ataque':110, 'Defensa':70,'AtaqueEspecial':115,'DefensaEspecial':70, 'Velocidad':90},70, 30,evolucion=MegaLucario())
+def Riolu():
+    return Pokemon('Riolu', 'Lucha',None, [EsferaAura, GarraMetal, AtaqueRapido, Amago], {'Ataque':70, 'Defensa':40,'AtaqueEspecial':35,'DefensaEspecial':40, 'Velocidad':60},40, 1,evolucion=Lucario())
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -302,3 +349,36 @@ def printLento(s, delay=0.04):
             sys.stdout.flush()
             time.sleep(delay)
         print()
+
+
+
+def getPokemon(n):
+    if n == "1":
+        return Bulbasaur()
+    elif n == "2":
+        return Ivysaur()
+    elif n == "3":
+        return Ivysaur()
+
+    elif n == "4":
+        return Charmander()
+    elif n == "5":
+        return Charmeleon()
+    elif n == "6":
+        return Charizard()
+
+    elif n == "7":
+        return Squirtle()
+    elif n == "8":
+        return Wartortle()
+    elif n == "9":
+        return Wartortle()
+
+    elif n == "10":
+        return Riolu()
+    elif n == "11":
+        return Lucario()
+    elif n == "12":
+        return MegaLucario()
+    else:
+        return Riolu()
