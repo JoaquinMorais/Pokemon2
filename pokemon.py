@@ -73,32 +73,25 @@ class Pokemon():
 
     def ventajaTipo(self,pos,tipoEnemigo):
         ataque = self.moves[pos]
+        # COMPLETOS: Acero Agua Bicho Dragon Electrico Fantasma Fuego Hada Hielo Lucha Normal Planta Psiquico Roca Siniestro Tierra Veneno Volador
         
-        # COMPLETOS: Planta Veneno Acero Bicho Electrico Hielo Lucha Roca Volador Dragon Normal
-
-
-        #Siniestro
-        
-
         if ataque.tipo == 'Acero':
             if tipoEnemigo in ['Fuego','Agua','Electrico','Acero']:
                 return 0.5
             if tipoEnemigo in ['Hada','Hielo','Roca']:
                 return 2
-            
+
+        if ataque.tipo == 'Agua':
+            if tipoEnemigo in ['Agua','Dragon','Planta']:
+                return 0.5
+            if tipoEnemigo in ['Roca','Fuego','Tierra']:
+                return 2
+
         if ataque.tipo == 'Bicho':
             if tipoEnemigo in ['Acero','Fantasma','Fuego','Hada','Lucha','Veneno','Volador']:
                 return 0.5
             if tipoEnemigo in ['Planta','Psiquico','Siniestro']:
                 return 2
-
-        if ataque.tipo == 'Electrico':
-            if tipoEnemigo in ['Dragon','Electrico','Planta']:
-                return 0.5
-            if tipoEnemigo in ['Agua','Volador']:
-                return 2
-            if tipoEnemigo in ['Tierra']:
-                return 0
         
         if ataque.tipo == 'Dragon':
             if tipoEnemigo in ['Acero']:
@@ -108,12 +101,40 @@ class Pokemon():
             if tipoEnemigo in ['Hada']:
                 return 0
 
+        if ataque.tipo == 'Electrico':
+            if tipoEnemigo in ['Dragon','Electrico','Planta']:
+                return 0.5
+            if tipoEnemigo in ['Agua','Volador']:
+                return 2
+            if tipoEnemigo in ['Tierra']:
+                return 0
+
+        if ataque.tipo == 'Fantasma':
+            if tipoEnemigo in ['Siniestro']:
+                return 0.5
+            if tipoEnemigo in ['Psiquico','Fantasma']:
+                return 2
+            if tipoEnemigo in ['Normal']:
+                return 0
+
+        if ataque.tipo == 'Fuego':
+            if tipoEnemigo in ['Agua','Dragon','Fuego','Roca']:
+                return 0.5
+            if tipoEnemigo in ['Bicho','Acero','Hielo','Planta']:
+                return 2
+
+        if ataque.tipo == 'Hada':
+            if tipoEnemigo in ['Acero','Fuego','Veneno']:
+                return 0.5
+            if tipoEnemigo in ['Dragon','Lucha','Siniestro']:
+                return 2
+
         if ataque.tipo == 'Hielo':
             if tipoEnemigo in ['Acero','Agua','Fuego','Hielo']:
                 return 0.5
             if tipoEnemigo in ['Dragon','Planta','Tierra','Volador']:
                 return 2
-        
+                
         if ataque.tipo == 'Lucha':
             if tipoEnemigo in ['Acero','Hielo','Normal','Roca','Siniestro']:
                 return 0.5
@@ -122,10 +143,36 @@ class Pokemon():
             if tipoEnemigo in ['Fantasma']:
                 return 0
 
+        if ataque.tipo == 'Normal':
+            if tipoEnemigo in ['Acero','Roca']:
+                return 0.5
+            if tipoEnemigo in ['Fantasma']:
+                return 0
+
+        if ataque.tipo == 'Planta':
+            if tipoEnemigo in ['Roca','Tierra','Agua']:
+                return 2
+            if tipoEnemigo in ['Acero','Bicho','Dragon','Veneno','Volador']:
+                return 0.5
+
+        if ataque.tipo == 'Psiquico':
+            if tipoEnemigo in ['Siniestro','Acero']:
+                return 0.5
+            if tipoEnemigo in ['Lucha','Veneno']:
+                return 2
+            if tipoEnemigo in ['Siniestro']:
+                return 0
+
         if ataque.tipo == 'Roca':
             if tipoEnemigo in ['Acero','Lucha','Tierra']:
                 return 0.5
             if tipoEnemigo in ['Bicho','Fuego','Hielo','Volador']:
+                return 2
+        
+        if ataque.tipo == 'Siniestro':
+            if tipoEnemigo in ['Hada','Lucha','Siniestro']:
+                return 0.5
+            if tipoEnemigo in ['Fantasma','Psiquico']:
                 return 2
 
         if ataque.tipo == 'Tierra':
@@ -136,23 +183,12 @@ class Pokemon():
             if tipoEnemigo in ['Fantasma']:
                 return 0 
 
-        if ataque.tipo == 'Fuego':
-            if tipoEnemigo in ['Agua','Dragon','Fuego','Roca']:
-                return 0.5
-            if tipoEnemigo in ['Bicho','Acero','Hielo','Planta']:
-                return 2
-
         if ataque.tipo == 'Veneno':
             if tipoEnemigo in ['Bicho','Planta']:
                 return 0.5
             if tipoEnemigo in ['Acero','Electrico','Fuego','Roca','Veneno']:
                 return 2
             if tipoEnemigo in ['Volador']:
-                return 0
-        if ataque.tipo == 'Normal':
-            if tipoEnemigo in ['Acero','Roca']:
-                return 0.5
-            if tipoEnemigo in ['Fantasma']:
                 return 0
 
         if ataque.tipo == 'Volador':
@@ -161,28 +197,7 @@ class Pokemon():
             if tipoEnemigo in ['Bicho','Lucha','Planta']:
                 return 2
 
-        if ataque.tipo == 'Planta':
-            if tipoEnemigo in ['Roca']:
-                return 2
-            if tipoEnemigo in ['Acero','Bicho','Dragon','Veneno','Volador']:
-                return 0.5
 
-        version = ['Fuego', 'Agua', 'Planta']
-        if ataque.tipo in version and tipoEnemigo in version:
-            for i, k in enumerate(version):
-                if self.tipo == k:
-                    #Ambos son del mismo tipo
-                    if tipoEnemigo == k:
-                        return 0.5
-                            
-                    #Pokemon2 es Fuerte
-                    if tipoEnemigo == version[(i+1)%3]:
-                        return 0.5
-                                
-                    #Pokemon2 es debil
-                    if tipoEnemigo == version[(i+2)%3]:
-                        return 2
-        return 1
     
     def Evolucionar(self):
         if self.evolucion:

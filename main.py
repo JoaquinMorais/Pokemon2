@@ -197,6 +197,8 @@ def Menu():
         time.sleep(1)
         clear()
         sys.exit()
+    elif num == "/n":
+        pass
     else:
         Menu()
 
@@ -211,8 +213,8 @@ def Main(intro = True):
         Menu()
 
 
-Pokemon1 = Squirtle()
-Pokemon2 = Bulbasaur()
+Pokemon1 = Riolu()
+Pokemon2 = Wartortle()
 
 
 
