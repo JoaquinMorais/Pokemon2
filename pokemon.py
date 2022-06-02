@@ -196,7 +196,7 @@ class Pokemon():
                 return 0.5
             if tipoEnemigo in ['Bicho','Lucha','Planta']:
                 return 2
-
+        return 1
 
     
     def Evolucionar(self):
@@ -368,32 +368,32 @@ def printLento(s, delay=0.04):
 
 
 def getPokemon(n):
-    if n == "1":
+    if n == "Bulbasaur":
         return Bulbasaur()
-    elif n == "2":
+    elif n == "Ivysaur":
         return Ivysaur()
-    elif n == "3":
+    elif n == "Venusaur":
         return Ivysaur()
 
-    elif n == "4":
+    elif n == "Charmander":
         return Charmander()
-    elif n == "5":
+    elif n == "Charmeleon":
         return Charmeleon()
-    elif n == "6":
+    elif n == "Charizard":
         return Charizard()
 
-    elif n == "7":
+    elif n == "Squirtle":
         return Squirtle()
-    elif n == "8":
+    elif n == "Wartortle":
         return Wartortle()
-    elif n == "9":
+    elif n == "Blastoise":
         return Wartortle()
 
-    elif n == "10":
+    elif n == "Riolu":
         return Riolu()
-    elif n == "11":
+    elif n == "Lucario":
         return Lucario()
-    elif n == "12":
+    elif n == "MegaLucario":
         return MegaLucario()
     else:
         return Riolu()

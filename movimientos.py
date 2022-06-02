@@ -42,7 +42,7 @@ GarraMetal = Movimientos('Garra Metal','Acero',50,95)
 AtaqueRapido = Movimientos('Ataque Rapido','Normal',40,100)
 Amago = Movimientos('Amago','Normal',30,100)
 PuñoIncremento = Movimientos('Puño Incremento','Lucha',60,100)
-ABocarrajo = Movimientos('ABocarrajo','Lucha',120,100)
+ABocarrajo = Movimientos('A Bocarrajo','Lucha',120,100)
 PulsoDragon = Movimientos('Pulso Dragon','Dragon',85,100)
 VelocidadExtrema = Movimientos('Velocidad Extrema','Normal',80,100)
 

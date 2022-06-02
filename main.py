@@ -9,6 +9,10 @@ from pokemon import *
 from drawPokemon import *
 from movimientos import *
 
+Pokemon1 = Riolu()
+Pokemon2 = Wartortle()
+
+
 ### Cosas Extra ###
 def printLento(s, delay=0.04):
     if s:
@@ -38,38 +42,7 @@ def efectividad(ef):
     else:
         return f"No Es Muy Efectivo..."
 
-def getPokemon(Pok,n):
-    """
-    if n == "1":
-        return Bulbasaur()
-    elif n == "2":
-        return Ivysaur()
-    elif n == "3":
-        return Ivysaur()
 
-    elif n == "4":
-        return Charmander()
-    elif n == "5":
-        return Charmeleon()
-    elif n == "6":
-        return Charizard()
-
-    elif n == "7":
-        return Squirtle()
-    elif n == "8":
-        return Wartortle()
-    elif n == "9":
-        return Wartortle()
-
-    elif n == "10":
-        return Riolu()
-    elif n == "11":
-        return Lucario()
-    elif n == "12":
-        return MegaLucario()
-    else:
-        return Riolu()
-    """
     
 
 ########## PELEAS ##########
@@ -167,6 +140,7 @@ def mostrarAtaques(difer1, difer2):
 
 ########## Menu ##########
 def Menu():
+    global Pokemon1
     time.sleep(2)
     clear()
     printLento("----- Menu -----")
@@ -189,8 +163,8 @@ def Menu():
         txt = Pokemon1.MostrarEnPokedex()
         printLento(txt)
     if num == "4":
-        n = str(input("Ingrese el numero del pokemon que desea elegir: "))
-        #getPokemon(Pokemon1,n)
+        n = str(input("Ingrese el nombre del pokemon que desea elegir: "))
+        Pokemon1 = getPokemon(n)
         printLento(f"{Pokemon1.name} elegido")
     elif num == "5":
         printLento("Cerrando Juego...",0.08)
@@ -213,8 +187,7 @@ def Main(intro = True):
         Menu()
 
 
-Pokemon1 = Riolu()
-Pokemon2 = Wartortle()
+
 
 
 
