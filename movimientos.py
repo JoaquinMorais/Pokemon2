@@ -27,7 +27,10 @@ Burbuja = Movimientos('Burbuja','Agua',40,100)
 Mordisco = Movimientos('Mordisco','Siniestro',60,95)
 Hidropulso = Movimientos('Hidropulso','Agua',60,100)
 AcuaCola = Movimientos('Acua Cola','Agua',90,90)
+GiroRapido = Movimientos('Giro Rapido','Normal',80,100)
 Cabezazo = Movimientos('Cabezazo','Normal',130,80)
+Hidrobomba = Movimientos('Hidrobomba','Agua',110,80)
+
 
 Drenadoras = Movimientos('Drenadoras','Planta',10,100,'Regenerar')
 LatigoCepa = Movimientos('Latigo Cepa','Planta',45,100)
@@ -36,6 +39,9 @@ HojaAfilada = Movimientos('Hoja Afilada','Planta',65,100)
 DobleFilo = Movimientos('Doble Filo','Normal',130,90)
 
 PolvoVeneno = Movimientos('Polvo Veneno','Veneno',0,100,'Envenenar',75)
+Paralizador = Movimientos('Paralizador','Planta',0,100,'Paralizar',75)
+Somnifero = Movimientos('Somnifero','Planta',0,100,'Dormir',75)
+
 
 EsferaAura = Movimientos('Esfera Aura','Lucha',80,100)
 GarraMetal = Movimientos('Garra Metal','Acero',50,95)
@@ -47,10 +53,15 @@ PulsoDragon = Movimientos('Pulso Dragon','Dragon',85,100)
 VelocidadExtrema = Movimientos('Velocidad Extrema','Normal',80,100)
 
 
+
 PulsoCura = Movimientos('Pulso Cura','Psiquico',0,100,'Cura')
 
-
-
+Confuncion = Movimientos('Confuncion','Psiquico',50,100,'Confuncion',10)
+Tornado = Movimientos('Tornado','Viento',40,100)
+Psicorrayo = Movimientos('Psicorrayo','Psiquico',80,100)
+VientoPlata = Movimientos('Viento Plata','Bicho',60,100)
+Zumbido = Movimientos('Zumbido','Bicho',90,100)
+TajoAereo = Movimientos('Tajo Aereo','Volador',75,95)
 
 
 

@@ -290,19 +290,32 @@ def Charmander():
     return Pokemon('Charmander','Fuego',None,[Arañazo,Ascuas,GarraMetal,FuriaDragon],{'Ataque':52, 'Defensa':43,'AtaqueEspecial':60,'DefensaEspecial':50, 'Velocidad':65},39,1,evolucion=Charmeleon())
 
     
+def Blastoise():
+    return Pokemon('Blastoise','Agua',None,[Hidrobomba,Cabezazo,Hidropulso,AcuaCola],{'Ataque':83, 'Defensa':100,'AtaqueEspecial':85,'DefensaEspecial':105, 'Velocidad':78},79,36,)
 
 def Wartortle():
-    return Pokemon('Wartortle','Agua',None,[Mordisco,Cabezazo,AcuaCola,Hidropulso],{'Ataque':63, 'Defensa':80,'AtaqueEspecial':65,'DefensaEspecial':80, 'Velocidad':58},59,16,)
+    return Pokemon('Wartortle','Agua',None,[Mordisco,GiroRapido,AcuaCola,Hidropulso],{'Ataque':63, 'Defensa':80,'AtaqueEspecial':65,'DefensaEspecial':80, 'Velocidad':58},59,16,evolucion=Blastoise())
 
 def Squirtle():
     return Pokemon('Squirtle', 'Agua',None, [Placaje,PistolaAgua,Burbuja,Mordisco], {'Ataque':48, 'Defensa':65,'AtaqueEspecial':50,'DefensaEspecial':64, 'Velocidad':43},44, 1, evolucion=Wartortle())
 
 
-
 def Ivysaur():
     return Pokemon('Ivysaur','Planta','Veneno',[DobleFilo,PolvoVeneno,HojaAfilada,LatigoCepa],{'Ataque':62, 'Defensa':63,'AtaqueEspecial':80,'DefensaEspecial':80, 'Velocidad':60},60,16)
+
 def Bulbasaur():
     return Pokemon('Bulbasaur', 'Planta','Veneno', [Placaje, LatigoCepa, Drenadoras, Derribo], {'Ataque':49, 'Defensa':49,'AtaqueEspecial':65,'DefensaEspecial':65, 'Velocidad':45},45, 1,evolucion=Ivysaur())
+
+
+
+def Butterfree():
+    return Pokemon('Butterfree', 'Bicho','Volador', [VientoPlata, Zumbido, PolvoVeneno, TajoAereo], {'Ataque':45, 'Defensa':50,'AtaqueEspecial':90,'DefensaEspecial':80, 'Velocidad':70},60, 10,)
+
+def Metapod():
+    return Pokemon('Metapod', 'Bicho',None, [Confuncion, Tornado, PolvoVeneno, Psicorrayo], {'Ataque':20, 'Defensa':55,'AtaqueEspecial':25,'DefensaEspecial':25, 'Velocidad':30},45, 7,evolucion=Butterfree())
+
+def Caterpie():
+    return Pokemon('Caterpie', 'Bicho',None, [Confuncion, Tornado, PolvoVeneno, Psicorrayo], {'Ataque':30, 'Defensa':35,'AtaqueEspecial':20,'DefensaEspecial':20, 'Velocidad':45},45, 1,evolucion=Metapod())
 
 
 
@@ -389,6 +402,13 @@ def getPokemon(n):
     elif n == "Blastoise":
         return Wartortle()
 
+    elif n == "Caterpie":
+        return Caterpie()
+    elif n == "Metapod":
+        return Metapod()
+    elif n == "Butterfree":
+        return Butterfree()
+
     elif n == "Riolu":
         return Riolu()
     elif n == "Lucario":
@@ -396,4 +416,5 @@ def getPokemon(n):
     elif n == "MegaLucario":
         return MegaLucario()
     else:
-        return Riolu()
+        printLento('No se encontró el pokemon... Se cargará Bulbasaur')
+        return Bulbasaur()

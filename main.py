@@ -143,12 +143,12 @@ def Menu():
     global Pokemon1
     time.sleep(2)
     clear()
-    printLento("----- Menu -----")
-    printLento("1) Jugar")
-    printLento("2) Evolucionar")
-    printLento("3) Pokedex")
-    printLento("4) Elegir Pokemon")
-    printLento("5) Salir")
+    print("----- Menu -----")
+    print("1) Jugar")
+    print("2) Evolucionar")
+    print("3) Pokedex")
+    print("4) Elegir Pokemon")
+    print("5) Salir")
     num = str(input(">> "))
     
     clear()
